@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+    <link rel = 'stylesheet' href = '{{url_for("static", filename = "style.css")}}'>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	</head>
+	<body>
+    <div id = 'container'>
+      <div id = 'head'>
+        <div id = 'title'>
+          <span style = 'color: #2ECC71'>IB </span>Math
+        </div>
+        <div id = 'subtitle'>
+          Wait why is IB green idk whatever
+        </div>
+      </div>
+      <div id = 'location'>
+        {% for l in ['All', 'Mine', 'Videos'] %}
+          {% if l == location %}
+          <a class = 'location' id = 'here' href = 'https://ibmath--ryan-jacobjacob.repl.co/{{l}}'>{{l}}</a>
+          {% else %}
+          <a class = 'location' href = 'https://ibmath--ryan-jacobjacob.repl.co/{{l}}'>{{l}}</a>
+          {% endif %}
+        {% endfor %}
+        <form action = '/{{location}}' id = 'form'>
+          <input name = 'query' type = 'text' id = 'query' placeholder = 'Search'></input>
+          <input name = 'location' id = 'location-input' class = 'hidden-input'></input>
+          <input type = 'submit' class = 'hidden-input'></input>
+        </form>
+      </div>
+      <div id = 'stream'>
+        {% block content %}
+        {% endblock %}
+      </div>
+      {% if location == 'All' or location == 'Videos' %}
+        <center>
+          <div id = 'looking-for'>
+          Can't find something?<br>
+            <a href = 'https://ibmath--ryan-jacobjacob.repl.co/ask' id = 'say-something'>
+              Ask about it
+            </a>
+          </div>
+        </center>
+      {% endif %}
+    </div>
+    {% if not session.get('ip') %}
+      <div id = 'load-screen'>
+        <div id = 'loading-head'>
+          <div id = 'title'>
+            <span style = 'color: #2ECC71'>IB </span>Math
+          </div>
+          <div id = 'runner'></div>
+        </div>
+      </div>
+    {% endif %}
+    <script src = '{{url_for("static", filename = "script.js")}}'></script>
+	</body>
+</html>

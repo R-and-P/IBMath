@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block content %}
+  {% block message %}
+  {% endblock %}
+  {% for post in posts %}
+    <a class = 'post' href = '/page?title={{post[1]}}'>
+      {% if post[0] == 'video' %}
+        <div class = 'video-post'>
+          {{post[1]}}
+          <iframe allowtransparency = 'true' frameBorder = '0' src = '{{post[2]}}' seamless allowfullscreen>Your device does not support this iframe</iframe>
+        </div>
+      {% elif post[0] == 'question' %}
+        <div class = 'question-post'>
+          {{post[1]}}
+        </div>
+      {% endif %}
+      <div class = 'info'>
+        <span class = 'user'>{{post[3]}}</span> &bull; {{post[4]}}
+      </div>
+      <div class = 'description'>
+        {% if post[5] == '' %}
+
+        {% else %}
+          {{post[5]}}
+        {% endif %}
+      </div>
+    </a>
+  {% endfor %}
+{% endblock %}

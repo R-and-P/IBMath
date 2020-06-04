@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <div class = 'info' id = 'question-head'>
+    <span class = 'user'>{{item[3]}}</span> asked on {{item[4]}}
+    </div>
+  <div id = 'question-contents'>
+    {{item[1]|safe}}
+  </div>
+  <hr id = 'horizontal-rule'>
+  {% if item[5] == '' %}
+    <div id = 'no-answer'>
+      Sorry, no answer yet. You can bookmark this page and check later.
+    </div>
+  {% else %}
+    <div>
+      {{item[5]|safe}}
+    </div>
+  {% endif %}
+{% endblock %}

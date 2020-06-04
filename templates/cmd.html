@@ -1,0 +1,62 @@
+<html>
+  <style>
+body, textarea {
+  background-color: black;
+  color: rgb(200, 200, 200);
+  font-family: monospace;
+  font-size: 15px;
+}
+textarea {
+  width: 100%;
+  //border: 1px solid rgb(100, 100, 100);
+  border: none;
+  outline: none;
+  border-top: 1px solid rgb(100, 100, 100);
+  margin-top: 10px;
+  padding-top: 10px;
+}
+sp {
+  color: rgb(255, 0, 0);
+}
+op {
+  color: rgb(0, 255, 0);
+}
+input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+  </style>
+  <body>
+    <div id = 'display'>
+      {{display|safe}}
+    </div>
+    <form id = 'form' action = '/cmd'>
+      <textarea oninput = 'this.style.height = "";this.style.height = this.scrollHeight + "px"' name = 'command' placeholder = 'Type here' autofocus></textarea>
+      <input type = 'submit'>
+    </form>
+    <script>
+isCTRL = false
+isENT = false
+document.body.onkeydown = function(e) {
+  if (e.key == 'Control') {
+    isCTRL = true
+  }
+  if (e.key == 'Enter') {
+    isENT = true
+  }
+  if (isCTRL && isENT) {
+    document.getElementById('form').submit()
+  }
+}
+document.body.onkeyup = function(e) {
+  if (e.key == 'Control') {
+    isCTRL = false
+  } else if (e.key = 'Enter') {
+    isENT = false
+  }
+}
+    </script>
+    <script src = '{{url_for("static", filename = "script.js")}}'></script>
+  </body>
+</html>
