@@ -3,6 +3,7 @@ from db_manager import search_query, search_text, get_all_posts, insert_question
 import hashlib
 import lorem
 from cmd_guide import handle
+from threading import Thread
 
 hash = lambda s: str(hashlib.sha256(s.encode('utf-8')).hexdigest())[:20]
 
@@ -82,7 +83,8 @@ def dated_url_for(endpoint, **vals):
   return url_for(endpoint, **vals)
 
 
-app.secret_key = 'yepprettysecretive'
+app.secret_key = 'iuar9378xoh0283409283cn498237b923'
 
 if __name__ == '__main__':
-  app.run(host='0.0.0.0', port=8080, debug = 1)
+  #app.run(host='0.0.0.0', port=8080, debug = 1) #test
+  Thread(target=app.run,args=("0.0.0.0",8080)).start() #permanent

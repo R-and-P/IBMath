@@ -153,6 +153,7 @@ a, a:hover, a:active, a:visited {
   margin-top: 40px;
   color: rgb(0, 0, 0);
   font-size: 13px;
+  margin-bottom: 10px;
 }
 
 #question-contents {
