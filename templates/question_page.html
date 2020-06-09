@@ -1,19 +1,25 @@
 {% extends 'layout.html' %}
 {% block content %}
   <div class = 'info' id = 'question-head'>
-    <span class = 'user'>{{item[3]}}</span> asked on {{item[4]}}
+    <div class = 'page-title'>
+      {{item[2]}}
     </div>
+    <div class = 'description'>
+      <span class = 'user'>{{item[-1]}}</span> asked on {{item[5]}}
+    </div>
+  </div>
   <div id = 'question-contents'>
-    {{item[1]|safe}}
+    {{item[4]|safe}}
   </div>
   <hr id = 'horizontal-rule'>
-  {% if item[5] == '' %}
+  {% if item[-5] == '' %}
     <div id = 'no-answer'>
       Sorry, no answer yet. You can bookmark this page and check later.
     </div>
   {% else %}
     <div>
-      {{item[5]|safe}}
+      Answered on {{item[-4]}}
+      {{item[-5]|safe}}
     </div>
   {% endif %}
 {% endblock %}

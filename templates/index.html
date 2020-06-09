@@ -3,25 +3,34 @@
   {% block message %}
   {% endblock %}
   {% for post in posts %}
-    <a class = 'post' href = '/page?title={{post[1]}}'>
-      {% if post[0] == 'video' %}
+    <a class = 'post' href = '/page?id={{post[0]}}'>
+      {% if post[1] == 'video' %}
         <div class = 'video-post'>
-          {{post[1]}}
-          <iframe allowtransparency = 'true' frameBorder = '0' src = '{{post[2]}}' seamless allowfullscreen>Your device does not support this iframe</iframe>
+          {{post[2]}}
+          <iframe allowtransparency = 'true' frameBorder = '0' src = '{{post[3]}}' seamless allowfullscreen>Your device does not support this iframe</iframe>
         </div>
-      {% elif post[0] == 'question' %}
+      {% elif post[1] == 'question' %}
         <div class = 'question-post'>
-          {{post[1]}}
+          {{post[2]}}
+        </div>
+      {% elif post[1] == 'resource' %}
+        <div class = 'resource-post'>
+          {{post[2]}} <div class ='link-icon-holder'><div class="link icon"></div></div>
         </div>
       {% endif %}
       <div class = 'info'>
-        <span class = 'user'>{{post[3]}}</span> &bull; {{post[4]}}
+        {% if post[1] in ['resource', 'video'] %}
+          <span class = 'user admin-username'>  {{post[-1]}}</span>
+        {% else %}
+          <span class = 'user'>  {{post[-1]}}</span>
+        {% endif %}
+        &bull; {{post[5]}}
       </div>
       <div class = 'description'>
-        {% if post[5] == '' %}
+        {% if post[4] == '' %}
 
         {% else %}
-          {{post[5]}}
+          {{post[4]}}
         {% endif %}
       </div>
     </a>

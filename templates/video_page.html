@@ -1,8 +1,8 @@
 {% extends 'layout.html' %}
 {% block content %}
   <div id = 'video-head'>
-    {{item[1]}}
+    {{item[2]}}
   </div>
-  <iframe id = 'full-iframe' allowtransparency = 'true' frameBorder = '0' src = '{{item[2]}}' seamless allowfullscreen>Your device does not support this iframe</iframe>
+  <iframe id = 'full-iframe' allowtransparency = 'true' frameBorder = '0' src = '{{item[3]}}' seamless allowfullscreen>Your device does not support this iframe</iframe>
   <div id = 'quiz-button'>Quiz yourself</div>
 {% endblock %}

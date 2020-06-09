@@ -1,10 +1,14 @@
 {% extends 'layout.html' %}
 {% block content %}
-  <div id = 'video-head'>
-    New question
+  <div id = 'ask-form-head'>
+    New post
+  </div>
+  <div id = 'ask-description'>
+    Speak your mind. You can type HTML directly, but must write latex either between escaped parentheses or double dollar signs.
   </div>
   <form id = 'question-form' action = '/Mine'>
-    <input type = 'submit' id = 'question-submit' value = 'Submit'>
+    <textarea name = 'title' id = 'question-title-input' placeholder = 'Write a title for your question' oninput = 'this.style.height = "";this.style.height = this.scrollHeight + "px"' ></textarea>
     <textarea name = 'question' id = 'question-input' oninput = 'this.style.height = "";this.style.height = this.scrollHeight + "px"' placeholder = 'Write your question here'></textarea>
+    <input type = 'submit' id = 'question-submit' value = 'Post'>
   </form>
 {% endblock %}

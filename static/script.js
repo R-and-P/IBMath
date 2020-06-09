@@ -5,3 +5,17 @@ document.body.onload  = function() {
     document.getElementById('load-screen').remove()
   })
 }
+
+showingMenu = false;
+document.getElementById('menu-button').onclick = function() {
+  if (showingMenu) {
+    document.getElementById('container').style.transform = 'translateX(-50%)'
+    document.getElementById('directory-holder').style.transform = 'translateX(-25%)'
+    document.getElementById('directory-holder').style.opacity = '0'
+  } else {
+    document.getElementById('container').style.transform = 'translateX(-25%)'
+    document.getElementById('directory-holder').style.transform = 'translateX(0)'
+    document.getElementById('directory-holder').style.opacity = '1'
+  }
+  showingMenu = !showingMenu
+}

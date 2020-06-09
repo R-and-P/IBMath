@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+    <link rel = 'stylesheet' href = '{{url_for("static", filename = "style.css")}}'>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+	</head>
+	<body>
+    <form action = '/{{location}}' id = 'form'>
+      <input name = 'query' type = 'text' id = 'query' placeholder = 'Search'></input>
+      <input name = 'location' id = 'location-input' class = 'hidden-input'></input>
+      <input type = 'submit' class = 'hidden-input'></input>
+    </form>
+    <div id = 'menu-button'>
+      <div class="menu icon"></div>
+    </div>
+    <div id = 'directory-holder'>
+      <div id = 'directory'>
+        <div class = 'directory-section-header'>PRIMARY</div>
+        {% if location == 'Mine' %}
+          <a class = 'directory-item' href = '/All posts'>Posts by everyone</a><br>
+          <a id = 'current-category' class = 'directory-item' href = '/Mine'>Posts by me</a><br>
+        {% else %}
+          <a id = 'current-category' class = 'directory-item' href = '/All posts'>Posts by everyone</a><br>
+          <a class = 'directory-item' href = '/Mine'>Posts by me</a><br>
+        {% endif %}
+        <div class = 'directory-section-header'>UNDER DEVELOPMENT</div>
+        {% for link in ['Miscellaneous', 'Topics'] %}
+          <a class = 'directory-item inactive-link' href = '/All posts'>{{link}}</a><br>
+        {% endfor %}
+      </div>
+    </div>
+    {% block page %}
+    {% endblock %}
+    <script src = '{{url_for("static", filename = "script.js")}}'></script>
+	</body>
+</html>

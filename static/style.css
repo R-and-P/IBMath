@@ -3,6 +3,20 @@ body {
   background-color: white;
 }
 
+#plus-holder {
+  display: table-cell;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+  background-color: rgb(110, 221, 156);
+  border-radius: 10px;
+  vertical-align: middle;
+}
+/*#2ECC71*/
+
 #container {
   width: 50%;
   min-width: 400px;
@@ -10,13 +24,14 @@ body {
   transform: translateX(-50%);
   position: absolute;
   font-family: 'Work Sans', sans-serif;
-  //border: 1px solid black;
+  transition: transform 0.5s;
+  //border: 1px solid red;
 }
 
 #title {
   font-weight: bold;
   font-size: 30px;
-  margin-top: 20px;
+  margin-top: 70px; //50px;
 }
 
 #subtitle {
@@ -37,12 +52,20 @@ body {
   padding: 0;
   padding-bottom: 5px;
   color: rgb(139, 139, 139);
+  transition: color 0.5s;
+}
+
+#here, #current-category {
+  color: rgb(64, 184, 64);
+  animation: border-reveal 1.5s;
+}
+
+#current-category {
+  border-left: 2px solid rgb(64, 184, 64);
 }
 
 #here {
-  border-bottom: 2px solid green;
-  color: green;
-  animation: border-reveal 1.5s;
+  border-bottom: 2px solid rgb(64, 184, 64);
 }
 
 #stream {
@@ -60,24 +83,24 @@ body {
   //border: 1px solid black;
 }
 
-.question-post {
+.question-post, .resource-post {
   //border: 1px solid black;
   height: 20px;
   line-height: 20px;
   white-space: nowrap;
 }
 
-.question-post, .video-post {
+.question-post, .video-post, .resource-post {
   margin-top: 50px; //30px;
 }
 
 
-.question-post::first-line, .video-post::first-line {
+.question-post::first-line, .video-post::first-line, .resource-post::first-line {
   font-weight: 600;
   color: black;
 }
 
-.question-post, .description {
+.question-post, .description, .resource-post {
   text-overflow: ellipsis;
   overflow: hidden;
 }
@@ -112,7 +135,7 @@ a, a:hover, a:active, a:visited {
     border-color: white;
   },
   to {
-    border-color: green;
+    border-color: rgb(64, 184, 64);
   }
 }
 
@@ -130,12 +153,14 @@ a, a:hover, a:active, a:visited {
   outline: none;
   border-radius: 15px;
   padding: 5px 8px 5px 8px;
+  position: absolutely;
 }
 
 #form {
   //display: inline-block;
   float: right;
-  margin-top: -5px;
+  //margin-top: -5px;
+  margin: 20px;
 }
 
 .user {
@@ -153,7 +178,7 @@ a, a:hover, a:active, a:visited {
   margin-top: 40px;
   color: rgb(0, 0, 0);
   font-size: 13px;
-  margin-bottom: 10px;
+  //margin-bottom: 10px;
 }
 
 #question-contents {
@@ -217,23 +242,14 @@ a, a:hover, a:active, a:visited {
   //border: 1px solid black;
 }
 
-#plus-holder {
-  //border: 1px solid black;
-  width: 20px;
-  height: 20px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  //border: 1px solid rgb(204, 204, 204);
-  display: block;
-}
-
+/*
 #plus-holder:hover>.plus.icon{
   color: rgb(196, 196, 196);
 }
+*/
 
 .plus.icon {
-  color: #000;
+  color: black;
   margin-left: 3px;
   margin-top: 10px;
   transition: color 0.3s;
@@ -262,37 +278,46 @@ a, a:hover, a:active, a:visited {
   width: 100%;
   height: 100%;
   position: relative;
-  margin-top: 70px;
+  //margin-top: 70px;
+  margin-top: 20px;
 }
 
-#question-input {
-  //background-color: rgb(245, 245, 245);
-  border: none;
-  border-top: 1px solid rgb(230, 230, 230);
+#question-input, #question-title-input {
   resize: none;
   font-family: 'Work Sans', sans-serif;
-  padding: 0;
-  padding-top: 10px;
+  padding: 5px;
+  //padding-top: 10px;
   display: block;
   border-radius: 3px;
   outline: none;
   width: 100%;
 }
 
+#question-input {
+  //background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(223, 223, 223);
+  //border-top: 1px solid rgb(230, 230, 230);
+}
+
 #question-submit {
   font-family: 'Work Sans', sans-serif;
   padding: 0;
   background-color: white;
-  border: none;
-  margin-bottom: 10px;
+  border: 1px solid rgb(223, 223, 223);
+  //margin-bottom: 10px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 3px;
+  margin-top: 10px;
   opacity: 1;
   transition: opacity 0.3s;
   //font-weight: bold;
+  background-color: #2ECC71;
+  color: white;
   outline: none;
 }
 
 #question-submit:hover {
-  opacity: 0.2;
+  opacity: 0.5;
 }
 
 #load-screen {
@@ -301,6 +326,7 @@ a, a:hover, a:active, a:visited {
   height: 100%;
   background-color: white;
   font-family: 'Work Sans', sans-serif;
+  z-index: 3;
 }
 
 #loading-head {
@@ -309,6 +335,7 @@ a, a:hover, a:active, a:visited {
   display: inline-block;
   left: 50%;
   top: 50%;
+  margin-top: -40px;
   transform: translateX(-50%) translateY(-50%);
   position: absolute;
   animation: loading-head-appear 1s;
@@ -352,4 +379,194 @@ a, a:hover, a:active, a:visited {
     left: 1px;
     width: 6px;
   }
+}
+
+.menu.icon {
+  color: rgb(139, 139, 139);
+  position: absolute;
+  margin-left: 2px;
+  margin-top: 10px;
+  width: 17px;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.menu.icon:before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 17px;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.menu.icon:after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 17px;
+  height: 1px;
+  background-color: currentColor;
+}
+
+#menu-button {
+  //border: 1px solid blue;
+  width: 20px;
+  height: 20px;
+  position: fixed;
+  margin: 20px;
+  z-index: 2;
+}
+
+/* Don't know how to get this to work
+.video-post:hover, .question-post:hover, .resource-post:hover {
+  color: rgb(196, 196, 196);
+}
+*/
+
+#directory-holder {
+  position: fixed;
+  //border: 1px solid black;
+  height: 100%;
+  width: 37.5%;
+  text-align: center;
+  overflow-y: scroll;
+  box-sizing: content-box;
+  background-color: white;
+  //z-index: 2; //test
+  left: 0;
+  opacity: 0;
+  transform: translateX(-25%);
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+#directory {
+  display: inline-block;
+  //border: 1px solid black;
+  font-family: 'Work Sans', sans-serif;
+  position: relative;
+  //margin-top: 60px;
+  margin-top: 40px;
+  text-align: left;
+  //width: 200px;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  //height: 10px;
+  //border: 1px solid black;
+}
+
+::-webkit-scrollbar-track {
+  //background: red;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 2px; 
+  height: 10px;
+  //
+}
+
+.directory-item {
+  display: block;
+  font-family: 'Work Sans', sans-serif;
+  color: rgb(58, 58, 58);
+  font-weight: bold;
+  font-size: 13.5px;
+  //margin-bottom: -5px;
+  margin-bottom: 7.5px;
+  transition: color 0.5s;
+  margin-left: 10px;
+  padding-left: 5px; //original commit
+}
+
+.location:hover, #menu-button, .question-title, .directory-item:hover {
+  color: rgb(196, 196, 196);
+}
+
+.directory-item.inactive-link {
+  //color: rgb(212, 212, 212);
+}
+
+#question-title-input {
+  border: 1px solid rgb(223, 223, 223);
+  font-weight: bold;
+  margin-bottom: 10px;
+  height: 16px;
+}
+
+.admin-username {
+  //color: rgb(78, 168, 78);
+}
+
+.page-title {
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.link.icon {
+  color: rgb(84, 192, 107);
+  position: absolute;
+  margin-left: 4px;
+  margin-top: 8px;
+  width: 7px;
+  height: 1px;
+  background-color: currentColor;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg) scale(0.7);
+}
+
+.link.icon:before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -7px;
+  width: 8px;
+  height: 5px;
+  border-radius: 2px;
+  border: solid 1px currentColor;
+}
+
+.link.icon:after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  right: -7px;
+  width: 8px;
+  height: 5px;
+  border-radius: 2px;
+  border: solid 1px currentColor;
+}
+
+.link-icon-holder {
+  //border: 1px solid black;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  //float: right;
+}
+
+.directory-section-header {
+  color: rgb(206, 206, 206);
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-size: 14.5px;
+  //font-weight: lighter;
+}
+
+#ask-form-head {
+  margin-top: 40px;
+  font-weight: bold;
+  font-size: 20px;
+  //margin-bottom: -50px;
+}
+
+#ask-description {
+  font-size: 13px;
+  color: rgb(163, 163, 163);
+  margin-top: 10px;
 }
