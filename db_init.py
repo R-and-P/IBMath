@@ -69,14 +69,4 @@ def trial():
   init()
 
 def select_has_substring(s, params):
-  print(select_query(params))
   return [x for x in select_query(params) if any(s.lower() in str(y).lower() for y in x[1:])]
-
-def db_main():
-  trial()
-  post_resource('Desmos', 'https://www.desmos.com/calculator', 'This is the description for Desmos', 'General', 'Poster of resources')
-  post_video('Complex 2 something', 'https://www.youtube.com/embed/9DKDz8DonNU', 'This is a video of something', 'Complex Numbers', 'Poster of video')
-  post_question('Title of question', 'actual question', 'Complex Numbers', 'Poster of question')
-db_main()
-for row in select_all():
-  print(row)

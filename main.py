@@ -5,12 +5,10 @@ import hashlib
 import lorem
 from cmd_guide import handle
 from threading import Thread
-'''
-import sys
-from db_init import db_main
-db_main()
-sys.exit()
-'''
+
+#from db_init import trial
+#trial()
+
 hash = lambda s: str(hashlib.sha256(s.encode('utf-8')).hexdigest())[:20]
 
 def safe_search(req, default):
@@ -23,10 +21,24 @@ def index():
   posts = safe_search(request, select_all())
   return render_template('index.html', location = 'All posts', posts = posts)
 
+@app.errorhandler(404)
+def page_not_found(e):
+  return render_template('error.html', message = 'Page not found'), 404
+
+@app.errorhandler(500)
+def subpage_not_found(e):
+  return render_template('error.html', message = 'Page not found'), 500
+
 @app.route('/Mine')
 def mine():
-  if request.args.get('question'):
+  if request.args.get('question') and not request.args.get('type'):
     post_question(request.args['title'], request.args['question'], 'General', session['ip'])
+  elif request.args.get('type') == 'question':
+    post_question(request.args['title'], request.args['question'], 'General', session['ip'])
+  elif request.args.get('type') == 'video':
+    post_video(request.args['title'], request.args['url'], request.args['question'], 'General', session['ip'])
+  elif request.args.get('type') == 'resource':
+    post_resource(request.args['title'], request.args['url'],request.args['question'], 'General', session['ip'])
   #posts = get_all_posts()
   posts = safe_search(request, select_query('poster="' + session['ip'] + '"'))
   return render_template('mine.html', location = 'Mine', posts = posts)
@@ -82,6 +94,12 @@ def ask():
   if request.args.get('query'):
     return render_template('index.html', location = 'All', posts = search(request))
   return render_template('ask.html', location = 'ask')
+
+@app.route('/admin_post')
+def admin_post():
+  if request.args.get('query'):
+    return render_template('index.html', location = 'All', posts = search(request))
+  return render_template('admin_post.html', location = 'ask')
 
 @app.route('/cmd')
 def cmd_line():

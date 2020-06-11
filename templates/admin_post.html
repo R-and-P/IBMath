@@ -1,0 +1,13 @@
+{% extends 'ask.html' %}
+{% block user_message %}
+{% endblock %}
+{% block admin_form %}
+  <div id = 'admin-form-part'>
+    <select name = 'type' class = 'type-input'>
+      <option value = 'question'>Question</option>
+      <option value = 'video'>Video</option>
+      <option value = 'resource'>Resource</option>
+    </select>
+    <input type = 'text' name = 'url' id = 'url-input' placeholder = 'URL, if needed'></input>
+  </div>
+{% endblock %}
