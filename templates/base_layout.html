@@ -20,11 +20,11 @@
       <div id = 'directory'>
         <div class = 'directory-section-header'>PRIMARY</div>
         {% if location == 'Mine' %}
-          <a class = 'directory-item' href = '/All posts'>Posts by everyone</a><br>
-          <a id = 'current-category' class = 'directory-item' href = '/Mine'>Posts by me</a><br>
+          <a class = 'directory-item' href = '/All posts'>All posts</a><br>
+          <a id = 'current-category' class = 'directory-item' href = '/Mine'>My posts</a><br>
         {% else %}
-          <a id = 'current-category' class = 'directory-item' href = '/All posts'>Posts by everyone</a><br>
-          <a class = 'directory-item' href = '/Mine'>Posts by me</a><br>
+          <a id = 'current-category' class = 'directory-item' href = '/All posts'>All posts</a><br>
+          <a class = 'directory-item' href = '/Mine'>My posts</a><br>
         {% endif %}
         <div class = 'directory-section-header'>UNDER DEVELOPMENT</div>
         {% for link in ['Miscellaneous', 'Topics'] %}

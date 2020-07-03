@@ -5,9 +5,10 @@
       {{item[2]}}
     </div>
     <div class = 'info'>
-      <span class = 'user'>{{item[-1]}}</span> asked on {{item[5]}}
+      <span class = 'user'>{{item[-1]}}</span> posted on {{item[5]}}
     </div>
   </div>
+  
   <div id = 'question-contents'>
     {{item[4]|safe}}
   </div>
@@ -18,8 +19,46 @@
     </div>
   {% else %}
     <div>
-      Answered on {{item[-4]}}
       {{item[-5]|safe}}
     </div>
   {% endif %}
+  <a id = 'respond-button' href = '/ask?ref={{item[0]}}'>
+    reply
+  </a>
+  <div class = 'page-title'>
+    Related
+  </div>
+  {% for post in posts %}
+    <a target = '_blank' class = 'post' href = '/page?id={{post[0]}}'>
+      {% if post[1] == 'video' %}
+        <div class = 'video-post'>
+          {{post[2]}}
+          <iframe allowtransparency = 'true' frameBorder = '0' src = '{{post[3]}}' seamless allowfullscreen>Your device does not support this iframe</iframe>
+        </div>
+      {% elif post[1] == 'question' %}
+        <div class = 'question-post'>
+          {{post[2]}}
+        </div>
+      {% elif post[1] == 'resource' %}
+        <div class = 'resource-post'>
+          {{post[2]}} <div class ='link-icon-holder'><div class="link icon"></div></div>
+        </div>
+      {% endif %}
+      <div class = 'info'>
+        {% if post[1] in ['resource', 'video'] %}
+          <span class = 'user admin-username'>  {{post[-1]}}</span>
+        {% else %}
+          <span class = 'user'>  {{post[-1]}}</span>
+        {% endif %}
+        &bull; {{post[5]}}
+      </div>
+      <div class = 'description'>
+        {% if post[4] == '' %}
+
+        {% else %}
+          {{post[4]}}
+        {% endif %}
+      </div>
+    </a>
+  {% endfor %}
 {% endblock %}

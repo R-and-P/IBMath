@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <link rel = 'stylesheet' href = '{{url_for("static", filename = "style1.css")}}'>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <form action = '/{{location}}' class = 'form'>
+      <input name = 'query' type = 'text' id = 'query' placeholder = 'Search'></input>
+      <input name = 'location' id = 'location-input' class = 'hidden-input'></input>
+      <input type = 'submit' class = 'hidden-input'></input>
+    </form>
+    <div class = 'head'> 
+      Menu button and search bar
+    </div>
+    <div class = 'stream'>
+      <div class = 'title'>
+        Title
+      </div>
+      <div class = 'location'>
+        Location items
+      </div>
+      <div class = 'post'>
+        Post content
+      </div>
+    </div>
+  </body>
+</html>

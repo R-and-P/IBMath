@@ -1,11 +1,13 @@
+'''
 import sqlite3 as sq
 import datetime as dt
-''' initialize db
+# initialize db
 c = sq.connect('posts.db')
 c.execute('DROP TABLE posts')
 c.execute('CREATE TABLE posts (type TEXT, title TEXT, video TEXT, poster TEXT, date TEXT, description TEXT)')
 c.close()
-'''
+
+
 def insert(typ, title, video, poster, description):
   with sq.connect('posts.db') as c:
     c.execute('INSERT INTO posts (type,title,video,poster,date,description) VALUES (?,?,?,?,?,?)', (typ,title,video,poster,dt.datetime.now().strftime('%b %d, %Y'),description))
@@ -49,3 +51,4 @@ def get_all_posts():
 #insert_video('Complex numbers part 2', 'https://www.youtube.com/embed/9DKDz8DonNU', 'Bob', 'This is a video or smth')
 
 #answer_question('Test 1 man', 'I hope you asdkj asdksdjss dlaksdj lkasjdla skdjasl kdj kas jdl ierj wpe weorweirwoi we rpoi weproiu wjhz ckjbflk jaskj as j')
+'''

@@ -9,6 +9,7 @@
     </div>
   {% endblock %}
   <form id = 'question-form' action = '/Mine'>
+    <input name = 'parent' type = 'text'  class = 'hidden-input' value = '{{parent}}'>
     <textarea name = 'title' id = 'question-title-input' placeholder = 'Write a title for your question' oninput = 'this.style.height = "";this.style.height = this.scrollHeight + "px"' ></textarea>
     {% block admin_form %}
     {% endblock %}

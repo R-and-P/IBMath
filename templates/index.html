@@ -3,7 +3,7 @@
   {% block message %}
   {% endblock %}
   {% for post in posts %}
-    <a class = 'post' href = '/page?id={{post[0]}}'>
+    <a target = '_blank' class = 'post' href = '/page?id={{post[0]}}'>
       {% if post[1] == 'video' %}
         <div class = 'video-post'>
           {{post[2]}}

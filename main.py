@@ -2,8 +2,7 @@ from flask import Flask, render_template, request, url_for, session, redirect
 #from db_manager import search_query, search_text, get_all_posts, insert_question
 from db_init import *
 import hashlib
-import lorem
-from cmd_guide import handle
+from cmd_guide import handle, cmd_help
 from threading import Thread
 
 #from db_init import trial
@@ -15,6 +14,11 @@ def safe_search(req, default):
   return default if not req.args.get('query') else search(req)
 
 app = Flask(__name__)
+
+@app.route('/test/All posts')
+def test_index():
+  posts = safe_search(request, select_all())
+  return render_template('new_index.html', location = 'All posts', posts = posts)
 
 @app.route('/All posts')
 def index():
@@ -32,7 +36,7 @@ def subpage_not_found(e):
 @app.route('/Mine')
 def mine():
   if request.args.get('question') and not request.args.get('type'):
-    post_question(request.args['title'], request.args['question'], 'General', session['ip'])
+    post_question(request.args['title'], request.args['question'], 'General', session['ip'], request.args.get('parent'))
   elif request.args.get('type') == 'question':
     post_question(request.args['title'], request.args['question'], 'General', session['ip'])
   elif request.args.get('type') == 'video':
@@ -82,9 +86,9 @@ def page():
     return render_template('index.html', location = 'All', posts = search(request))
   item = select_query("id='" + request.args['id'] + "'")[0]
   if item[1] == 'video':
-    return render_template('video_page.html', item = item, location = 'page')
+    return render_template('video_page.html', item = item, location = 'page', posts = get_responses(item[0]))
   elif item[1] == 'question':
-    return render_template('question_page.html', item = item, location = 'page')
+    return render_template('question_page.html', item = item, location = 'page', posts = get_responses(item[0]))
   elif item[1] == 'resource':
     return redirect(item[3])
     #render_template('resource_page.html', item = item, location = 'page')
@@ -93,7 +97,7 @@ def page():
 def ask():
   if request.args.get('query'):
     return render_template('index.html', location = 'All', posts = search(request))
-  return render_template('ask.html', location = 'ask')
+  return render_template('ask.html', location = 'ask', parent = request.args.get('ref'))
 
 @app.route('/admin_post')
 def admin_post():
@@ -103,7 +107,8 @@ def admin_post():
 
 @app.route('/cmd')
 def cmd_line():
-  display = '<op>vid`[URL]`[TITLE]`[DESC]</op> to insert embed of [URL] with [TITLE] and [DESC]<br><op>ans`[Q]`[A]</op> to answer [Q] with [A]<br><op>del`[TITLE]</op> to delete item with [TITLE]<br><op>ask`[Q]</op> to ask [Q]<br><op>completely empty database</op> to completely empty database<br><sp>CTRL-ENT</sp> to submit'
+  display = cmd_help
+  print('aksdjfgalkhsdfasdf:::', request.args.get('command'))
   if request.args.get('command'):
     display = handle(request.args['command'], session)
   return render_template('cmd.html', display = display)
