@@ -12,7 +12,7 @@ body {
   text-align: center;
   font-size: 20px;
   color: white;
-  background-color: rgb(110, 221, 156);
+  background-color: rgb(94, 196, 136);
   border-radius: 10px;
   vertical-align: middle;
   transition: background-color 0.5s;
@@ -46,7 +46,7 @@ body {
 }
 
 #location {
-  font-size: 13px;
+  font-size: 15px;
   //color: rgb(139, 139, 139);
   margin-top: 30px;
 }
@@ -125,7 +125,7 @@ body {
 }
 
 iframe {
-  border-radius: 2px;
+  border-radius: 3px;
   //margin: 5px 0 5px 0;
   margin: 6px 0 5px 0;
   width: 100%;
@@ -193,7 +193,7 @@ a, a:hover, a:active, a:visited {
 
 #quiz-button {
   color: rgb(78, 78, 78);
-  font-size: 14px;
+  font-size: 15px;
   //border: 1px solid rgb(165, 165, 165);
   padding: 7px 10px 7px 10px;
   border-radius: 20px;
@@ -201,25 +201,32 @@ a, a:hover, a:active, a:visited {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 20px;
+  margin: 40px 0 0px 0;
 }
 
-#horizontal-rule {
-  margin: 20px 0 20px 0;
-  border: 0.5px solid rgb(230, 230, 230);
+.answer-contents {
+  margin-top: 40px;
+}
+
+.horizontal-rule {
+  margin: 100px 0 20px 0;//60px 0 20px 0;
+  border: none;
+  //border-top: 0.5px solid rgb(230, 230, 230);
+  border-top: 0.5px solid rgb(200, 200, 200);
   border-radius: 5px;
 }
 
-#no-answer {
+.no-answer {
   color: rgb(177, 177, 177);
-  font-size: 13px;
+  font-size: 14px;
   margin-bottom: 30px;
 }
 
 #video-head {
-  margin: 40px 0 -30px 0;
+  margin: 40px 0 0px 0;
   font-weight: bold;
   animation: fade-in 0.2s;
+  font-size: 17px;
 }
 
 @keyframes fade-in {
@@ -285,7 +292,7 @@ a, a:hover, a:active, a:visited {
   height: 100%;
   position: relative;
   //margin-top: 70px;
-  margin-top: 20px;
+  margin-top: 50px; //20px;
 }
 
 #question-input, #question-title-input {
@@ -509,9 +516,28 @@ a, a:hover, a:active, a:visited {
 }
 
 .page-title {
-  font-weight: bold;
+  //font-weight: bold;
+  //margin-left: -20px;
+  margin-top: -30px;//50px;
+  //margin-left: -20px;
+  //color: rgb(80, 80, 80);
+  font-size: 16px;
+}
+.page-title.main {
+  color: black;
+  //margin-left: -20px;
   font-size: 18px;
-  //margin-bottom: 10px;
+  font-weight: bold;
+  margin-top: 50px;
+}
+.white-back {
+  background-color: white;
+  z-index: 2;
+  padding-right: 15px;
+}
+
+.indent {
+  //margin-left: 2px;
 }
 
 .link.icon {
@@ -578,10 +604,10 @@ a, a:hover, a:active, a:visited {
 }
 
 #error-message {
-  color: red;
-  font-weight: bold;
+  color: rgb(231, 204, 204);
+  //font-weight: bold;
   font-size: 20px;
-  margin-top: 40px;
+  margin-top: 100px;
 }
 
 #admin-form-part {
@@ -617,3 +643,63 @@ iframe, img {
   background-color: rgb(53, 53, 53);
 }
 */
+
+.little-from-the-top {
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+/*
+.video-post, .question-post, .resource-post {
+  transition: color 0.5s;
+}
+
+.video-post:hover, .question-post:hover, .resource-post:hover {
+  color: rgb(212, 212, 212);
+}
+*/
+
+.edit-solid.icon {
+  color: rgb(84, 192, 107);
+  position: absolute;
+  margin-left: 4px;
+  margin-top: 7px;
+  width: 14px;
+  height: 2px;
+  border-radius: 1px;
+  border: solid 1px currentColor;
+  background-color: currentColor;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.edit-solid.icon:before {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: -1px;
+  width: 0px;
+  height: 0px;
+  border-left: solid 5px transparent;
+  border-right: solid 5px currentColor;
+  border-top: solid 2px transparent;
+  border-bottom: solid 2px transparent;
+}
+
+.edit-holder {
+  //transform: translateX(-25px) translateY(-20px);
+  //transform: translateY(-20px) translateX(-10px);
+  //color: rgb(190, 236, 195);
+  //float: right;
+  color: rgb(84, 192, 107);
+  font-size: 15px;
+  margin-top: -30px;
+  padding-bottom: 0px;
+}
+a.green {
+  color: rgb(84, 192, 107);
+}
+
+.tags {
+  color: rgb(94, 196, 136);
+  margin-bottom: 5px;
+}

@@ -1,11 +1,11 @@
 {% extends 'layout.html' %}
 {% block content %}
   <div id = 'ask-form-head'>
-    New post
+    New question
   </div>
   {% block user_message %}
     <div id = 'ask-description'>
-      Speak your mind. You can type HTML directly, but must write latex either between escaped parentheses or double dollar signs.
+      You can type HTML directly, but must write latex either between escaped parentheses or double dollar signs.
     </div>
   {% endblock %}
   <form id = 'question-form' action = '/Mine'>

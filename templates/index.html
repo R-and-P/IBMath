@@ -3,7 +3,7 @@
   {% block message %}
   {% endblock %}
   {% for post in posts %}
-    <a target = '_blank' class = 'post' href = '/page?id={{post[0]}}'>
+    <a class = 'post' href = '/page?id={{post[0]}}'>
       {% if post[1] == 'video' %}
         <div class = 'video-post'>
           {{post[2]}}
@@ -17,9 +17,16 @@
         <div class = 'resource-post'>
           {{post[2]}} <div class ='link-icon-holder'><div class="link icon"></div></div>
         </div>
+      {% elif post[1] == 'text' %}
+        <div class = 'question-post'>
+          {{post[2]}}
+        </div>
       {% endif %}
       <div class = 'info'>
-        {% if post[1] in ['resource', 'video'] %}
+        <div class = 'tags'>
+          {{post[-3]}}
+        </div>
+        {% if post[1] in ['resource', 'video', 'text'] %}
           <span class = 'user admin-username'>  {{post[-1]}}</span>
         {% else %}
           <span class = 'user'>  {{post[-1]}}</span>
@@ -30,7 +37,7 @@
         {% if post[4] == '' %}
 
         {% else %}
-          {{post[4]}}
+          {{post[4]|safe}}
         {% endif %}
       </div>
     </a>

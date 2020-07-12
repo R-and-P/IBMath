@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <div id = 'ask-form-head'>
+    Update question
+  </div>
+  {% block user_message %}
+    <div id = 'ask-description'>
+      You can type HTML directly, but must write latex either between escaped parentheses or double dollar signs.
+    </div>
+  {% endblock %}
+  <form id = 'question-form' action = '/All posts'>
+    <input name = 'user_update' type = 'text'  class = 'hidden-input' value = '{{user_update}}'>
+    <input name = 'id' type = 'text'  class = 'hidden-input' value = '{{id}}'>
+    <textarea name = 'title' id = 'question-title-input' placeholder = 'Write a title for your question' oninput = 'this.style.height = "";this.style.height = this.scrollHeight + "px"' onload = 'this.style.height = "";this.style.height = this.scrollHeight + "px"'>{{title}}</textarea>
+    {% block admin_form %}
+    {% endblock %}
+    <textarea name = 'user_content' id = 'question-input' oninput = 'this.style.height = "";this.style.height = this.scrollHeight + "px"' placeholder = 'Description' onload = 'this.style.height = "";this.style.height = this.scrollHeight + "px"'>{{user_content}}</textarea>
+    <input type = 'submit' id = 'question-submit' value = 'Update'>
+  </form>
+{% endblock %}

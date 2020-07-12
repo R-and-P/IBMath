@@ -29,7 +29,7 @@ def select_query(q):
       return select_all()
     return c.execute('SELECT * FROM posts WHERE ' + q).fetchall()[::-1]
 
-def update(id, field, value, is_admin):
+def update(id, field, value, is_admin = False):
   with sq.connect('Posts.db') as c:
     command = 'UPDATE Posts SET ' + field + '=\'' + value + '\' WHERE id=' + id
     print(command)
@@ -57,6 +57,14 @@ def edit_question(id, question):
 
 # now() in post_video and post_resource go to user_update because no distinction between user and admin is needed as only admin may post videos and resources
 
+def trade_keys(id1, id2):
+  id2_id = str(get_field(id2, 'id')[0])
+  id1_id = str(get_field(id1, 'id')[0])
+  update(id2, 'id', '-1')
+  update(id1, 'id', '-2')
+  update('-2', 'id', id2_id)
+  update('-1', 'id', id1_id)
+
 def post_video(title, url, description, location, poster):
   insert('video', title, url, description, now(), '', '', location, '', poster)
 
@@ -70,6 +78,8 @@ def post(type, title, url, desc, location, poster):
     post_resource(title, url, desc, location, poster)
   elif type == 'question':
     post_question(title, desc, location, poster)
+  elif type == 'text':
+    insert('text', title, '', desc, now(), '', '', 'misc', '', poster)
 
 def trial():
   with sq.connect('Posts.db') as c:

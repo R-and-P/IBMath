@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block content %}
+  {% block main %}
+  {% endblock %}
+  <div class = 'page-title'><span class = 'white-back'>
+    Recommended</span>
+  </div>
+  {% if posts|length > 0 %}
+    {% for post in posts %}
+      <a class = 'post' href = '/page?id={{post[0]}}'>
+        {% if post[1] == 'video' %}
+          <div class = 'video-post'>
+            {{post[2]}}
+            <iframe allowtransparency = 'true' frameBorder = '0' src = '{{post[3]}}' seamless allowfullscreen>Your device does not support this iframe</iframe>
+          </div>
+        {% elif post[1] == 'question' %}
+          <div class = 'question-post'>
+            {{post[2]}}
+          </div>
+        {% elif post[1] == 'resource' %}
+          <div class = 'resource-post'>
+            {{post[2]}} <div class ='link-icon-holder'><div class="link icon"></div></div>
+          </div>
+        {% endif %}
+        <div class = 'info'>
+          {% if post[1] in ['resource', 'video'] %}
+            <span class = 'user admin-username'>  {{post[-1]}}</span>
+          {% else %}
+            <span class = 'user'>  {{post[-1]}}</span>
+          {% endif %}
+          &bull; {{post[5]}}
+        </div>
+        <div class = 'description'>
+          {% if post[4] == '' %}
+
+          {% else %}
+            {{post[4]}}
+          {% endif %}
+        </div>
+      </a>
+    {% endfor %}
+  {% else %}
+    <div class = 'answer-contents no-answer indent'>This page has not been linked to any other posts yet.</div>
+  {% endif %}
+  <hr class = 'horizontal-rule'>
+  <div class = 'page-title'><span class = 'white-back'>
+    Ask</span>
+  </div>
+  <form id = 'question-form' action = '/Mine'>
+    <input name = 'parent' type = 'text'  class = 'hidden-input' value = '{{item[0]}}'>
+    <textarea name = 'title' id = 'question-title-input' placeholder = 'Write a title for your question' oninput = 'this.style.height = "";this.style.height = this.scrollHeight + "px"' ></textarea>
+    <textarea name = 'question' id = 'question-input' oninput = 'this.style.height = "";this.style.height = this.scrollHeight + "px"' placeholder = "Now tell us the details. This will be submitted with this post as it's parent."></textarea>
+    <input type = 'submit' id = 'question-submit' value = 'Submit'>
+  </form>
+{% endblock %}

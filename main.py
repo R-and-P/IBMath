@@ -22,8 +22,25 @@ def test_index():
 
 @app.route('/All posts')
 def index():
+  if request.args.get('id'):
+    id = request.args['id']
+    user_content = request.args['user_content']
+    user_update = request.args['user_update']
+    title = request.args['title']
+    update(id, 'user_content', user_content)
+    update(id, 'user_update', user_update)
+    update(id, 'title', title)
   posts = safe_search(request, select_all())
   return render_template('index.html', location = 'All posts', posts = posts)
+
+@app.route('/edit')
+def edit():
+  id = request.args['id']
+  user_content = get_field(id, 'user_content')[0]
+  title = get_field(id, 'title')[0] 
+  if session['ip'] == get_field(id, 'poster')[0]:
+    return render_template('edit.html', id = id, user_content = user_content, user_update = now(), title = title, ip = get_field(id, 'poster'))
+  return page_not_found('');
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -35,6 +52,8 @@ def subpage_not_found(e):
 
 @app.route('/Mine')
 def mine():
+  print('from mine>>>')
+  print(session['ip'])
   if request.args.get('question') and not request.args.get('type'):
     post_question(request.args['title'], request.args['question'], 'General', session['ip'], request.args.get('parent'))
   elif request.args.get('type') == 'question':
@@ -65,6 +84,7 @@ def resources():
 @app.route('/setIP', methods = ['post'])
 def setIp():
   session['ip'] = hash(request.form['ip'])
+  print('>>>', session['ip'])
   return ''
 
 def search(request):
@@ -89,6 +109,8 @@ def page():
     return render_template('video_page.html', item = item, location = 'page', posts = get_responses(item[0]))
   elif item[1] == 'question':
     return render_template('question_page.html', item = item, location = 'page', posts = get_responses(item[0]))
+  elif item[1] == 'text':
+    return render_template('text_page.html', item = item, location = 'page', posts = get_responses(item[0]))
   elif item[1] == 'resource':
     return redirect(item[3])
     #render_template('resource_page.html', item = item, location = 'page')
@@ -108,7 +130,6 @@ def admin_post():
 @app.route('/cmd')
 def cmd_line():
   display = cmd_help
-  print('aksdjfgalkhsdfasdf:::', request.args.get('command'))
   if request.args.get('command'):
     display = handle(request.args['command'], session)
   return render_template('cmd.html', display = display)
@@ -128,7 +149,7 @@ def dated_url_for(endpoint, **vals):
   return url_for(endpoint, **vals)
 
 
-app.secret_key = 'iuar9378xoh0283409283cn498237b923'
+app.secret_key = 'iuar9378xoh0283409283cdght429348nf230847c23n498237b923'
 
 if __name__ == '__main__':
   #app.run(host='0.0.0.0', port=8080, debug = 1) #test

@@ -1,11 +1,12 @@
 #from db_manager import answer_question, insert_video, delete_by_title, insert_question, utterly_obliterate
 # the above references an outdated db, please update handle() to fit Posts instead of posts
-cmd_help = '<op>fields</op> view post fields<br><op>edit`[ID]`[FIELD]`[VAL]</op> to edit post with id [ID] by setting [FIELD] to [VAL]<br><op>del`[IDs]</op> to delete items with [IDs] separated by spaces<br><op>get`[ID]`[FIELD]</op> to view value in [FIELDs comma separated] of post item with [ID]<br><op>post`[TYPE]`[TITLE]`[URL]`[DESC]`[LOCATION]</op> to post [TYPE] with [DESC] and optional [URL for TYPE video or resource] from admin account<br><sp>CTRL-ENT</sp> to submit<br>Separate commands with <op>\\n</op>'
+cmd_help = '<op>fields</op> view post fields<br><op>switch`[ID1]`[ID2]</op> switch id\'s of posts with id\'s [ID1] and [ID2]<br><op>edit`[ID]`[FIELD]`[VAL]</op> to edit post with id [ID] by setting [FIELD] to [VAL]<br><op>del`[IDs]</op> to delete items with [IDs] separated by spaces<br><op>get`[ID]`[FIELD]</op> to view value in [FIELDs comma separated] of post item with [ID]<br><op>post`[TYPE]`[TITLE]`[URL]`[DESC]`[LOCATION]</op> to post [TYPE] with [DESC] and optional [URL for TYPE video or resource] from admin account<br><sp>CTRL-ENT</sp> to submit<br>Separate commands with <op>\\n</op>'
 
-from db_init import update, delete, get_field, post
+#from db_init import update, delete, get_field, post
+from db_init import *
 
 def handle(s, sess):
-  commands = s.split('\n')
+  commands = [s.replace('\n', '<br/>')] #s.split('\n')
   out = ''
   for command in commands:
     parts = command.split('`')
@@ -26,7 +27,11 @@ def handle(s, sess):
       id, field = parts[1:]
       out += field + ' of post ' + id + ': ' + str(get_field(id, field)).replace('\'', '')
     elif parts[0] == 'fields':
-      out += 'type, title, url, user_content, user_update, admin_content, admin_update, location, parent_post_id, poster'
+      out += 'type [question, text, video, resource], title, url, user_content, user_update, admin_content, admin_update, location, parent_post_id, poster'
+    elif parts[0] == 'switch':
+      id1, id2 = parts[1:]
+      trade_keys(str(id1), str(id2))
+      out += 'traded keys ' + id1 + ' and ' + id2
     out += '<br>'
   return out
 

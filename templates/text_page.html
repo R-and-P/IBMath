@@ -15,23 +15,8 @@
       </div>
     {% endif %}
   </div>
-  
   <div id = 'question-contents' class = 'indent'>
     {{item[4]|safe}}
-  </div>
-  <hr class = 'horizontal-rule'>
-  <div class = 'page-title'>
-    <span class = 'white-back'>
-    Answer</span>
-  </div>
-  <div class = 'answer-contents indent'>
-  {% if item[-5] == '' %}
-    <div class = 'no-answer'>
-      Sorry, no answer yet. You can bookmark this page and check later.
-    </div>
-  {% else %}
-      {{item[-5]|safe}}
-  {% endif %}
   </div>
   <hr class = 'horizontal-rule'>
 {% endblock %}
