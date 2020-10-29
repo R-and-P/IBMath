@@ -26,8 +26,8 @@
           <a id = 'current-category' class = 'directory-item' href = '/All posts'>All posts</a><br>
           <a class = 'directory-item' href = '/Mine'>My posts</a><br>
         {% endif %}
-        <div class = 'directory-section-header'>UNDER DEVELOPMENT</div>
-        {% for link in ['Miscellaneous', 'Topics'] %}
+        <div class = 'directory-section-header'>CATEGORIES (UNDER DEVELOPMENT)</div>
+        {% for link in categories %}
           <a class = 'directory-item inactive-link' href = '/All posts'>{{link}}</a><br>
         {% endfor %}
       </div>

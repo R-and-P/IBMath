@@ -58,12 +58,33 @@ def edit_question(id, question):
 # now() in post_video and post_resource go to user_update because no distinction between user and admin is needed as only admin may post videos and resources
 
 def trade_keys(id1, id2):
-  id2_id = str(get_field(id2, 'id')[0])
-  id1_id = str(get_field(id1, 'id')[0])
+  id1, id2 = str(id1), str(id2)
+  id2_id = str(id2) #str(get_field(id2, 'id')[0])
+  id1_id = str(id1) #str(get_field(id1, 'id')[0])
   update(id2, 'id', '-1')
+  with sq.connect('Posts.db') as c:
+    c.execute('UPDATE Posts SET parent_post_id=-1 WHERE parent_post_id=' + id2)
   update(id1, 'id', '-2')
+  with sq.connect('Posts.db') as c:
+    c.execute('UPDATE Posts SET parent_post_id=-2 WHERE parent_post_id=' + id1)
   update('-2', 'id', id2_id)
+  with sq.connect('Posts.db') as c:
+    c.execute('UPDATE Posts SET parent_post_id=' + id2_id + ' WHERE parent_post_id=-2')
   update('-1', 'id', id1_id)
+  with sq.connect('Posts.db') as c:
+    c.execute('UPDATE Posts SET parent_post_id=' + id1_id + ' WHERE parent_post_id=-1')
+
+def reorder(old_id, new_id):
+  #slides post with id old_id to id new_id
+  old_id, new_id = int(old_id), int(new_id)
+  if old_id > new_id:
+    for i in range(old_id, new_id, -1):
+      print(i)
+      trade_keys(i, i - 1)
+  elif new_id > old_id:
+    for i in range(old_id, new_id):
+      print(i)
+      trade_keys(i, i + 1)
 
 def post_video(title, url, description, location, poster):
   insert('video', title, url, description, now(), '', '', location, '', poster)

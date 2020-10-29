@@ -20,6 +20,10 @@ def test_index():
   posts = safe_search(request, select_all())
   return render_template('new_index.html', location = 'All posts', posts = posts)
 
+@app.route('/')
+def Index():
+  return index()
+
 @app.route('/All posts')
 def index():
   if request.args.get('id'):
